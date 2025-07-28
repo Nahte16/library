@@ -7,6 +7,7 @@ class LibraryBook(models.Model):
     ######################
     # Private attributes #
     ######################
+    _inherit = "library.book"
     _name = "library.book"
     _description = "Book"
     _order = "name"
@@ -19,6 +20,16 @@ class LibraryBook(models.Model):
     isbn_13 = fields.Char(string="ISBN 13",
                           required=True)
 
+    author_id = fields.Many2one(
+        'res.partner',
+        string = 'Author',
+        required = True
+    )
+
+    category_id = fields.Many2many(
+        'library.book.category',
+        string='Categories',
+    )
     ######################
     # Fields declaration #
     ######################
